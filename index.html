@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -12,8 +13,8 @@
       --muted:#6f7a8a;
       --line:#dbe2ea;
       --navy:#0c2d59;
-      --blue:#1559b7;
-      --blue-soft:#eef5ff;
+      --blue:#c62828;
+      --blue-soft:#fff1f1;
       --green:#2f7d3f;
       --green-soft:#eef8f0;
       --amber:#f3a400;
@@ -170,7 +171,7 @@
       cursor:pointer;
     }
 
-    .blue .panel-head{background:linear-gradient(135deg,#103b78,#1656aa)}
+    .blue .panel-head{background:linear-gradient(135deg,#9f1f1f,#d33232)}
     .green .panel-head{background:linear-gradient(135deg,#2a6b37,#3d8e4b)}
 
     .panel-title{
@@ -253,6 +254,110 @@
       color:var(--green);
     }
 
+
+    .thermo-leader{
+      margin:18px 18px 10px;
+      border:2px solid #e15b5b;
+      background:#fff7f7;
+      border-radius:14px;
+      padding:14px 16px;
+      position:relative;
+    }
+    .thermo-leader::after{
+      content:"";
+      position:absolute;
+      left:30px;
+      bottom:-18px;
+      width:2px;
+      height:18px;
+      background:#d76a6a;
+    }
+    .leader-badge{
+      display:inline-block;
+      margin-left:8px;
+      padding:4px 7px;
+      border-radius:999px;
+      background:#c62828;
+      color:#fff;
+      font-size:10px;
+      font-weight:900;
+      vertical-align:middle;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .subordinates{
+      margin:0 18px 18px 48px;
+      border-left:2px solid #e2a3a3;
+    }
+    .subordinates .table{
+      border:1px solid var(--line);
+      border-left:none;
+      border-radius:0 12px 12px 0;
+      overflow:hidden;
+      background:#fff;
+    }
+    .subordinates .table tr{
+      position:relative;
+    }
+    .subordinates .table td:first-child{
+      position:relative;
+      padding-left:20px;
+    }
+    .subordinates .table td:first-child::before{
+      content:"";
+      position:absolute;
+      left:-48px;
+      top:50%;
+      width:34px;
+      height:1px;
+      background:#e2a3a3;
+    }
+    .off-row td{
+      background:#f2f3f5 !important;
+      color:#888f98 !important;
+    }
+    .off-row .person{
+      color:#7d838a !important;
+    }
+
+
+    .weekly{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      margin-top:7px;
+      padding:5px 8px;
+      border-radius:999px;
+      background:#eef2f7;
+      color:#4b586a;
+      font-size:11px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .thermo-weekly{
+      display:inline-flex;
+      align-items:center;
+      margin-top:7px;
+      padding:5px 9px;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.28);
+      color:#fff;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .client.exit .weekly{
+      background:#ffe8e8;
+      color:#a93434;
+    }
+
+    .client.light .weekly{
+      background:#e3efff;
+      color:#285e9e;
+    }
+
     .portfolio{
       margin-top:20px;
       padding:20px 22px 22px;
@@ -294,6 +399,30 @@
       font-size:12px;
       line-height:1.35;
     }
+
+
+    .client.norio{background:#fff7ed;border-color:#fed7aa}
+    .client.fini{background:#fff1f6;border-color:#f9c2d5}
+    .client.havan{background:#eff6ff;border-color:#bfdbfe}
+    .client.mds{background:#eef2f8;border-color:#aebdd2}
+    .client.nutriport{background:#fff7ed;border-color:#fdba74}
+    .client.prosangue{background:#fff1f1;border-color:#fecaca}
+    .client.transit{background:#f0fdf4;border-color:#bbf7d0}
+    .client.gmpromo{background:#fff1f6 !important;border-color:#f9c2d5 !important}
+
+    .client.norio .weekly,.client.nutriport .weekly{background:#ffedd5;color:#9a4d0a}
+    .client.fini .weekly,.client.gmpromo .weekly{background:#fce7f3;color:#a63b68}
+    .client.havan .weekly{background:#dbeafe;color:#285e9e}
+    .client.mds .weekly{background:#dbe3ef;color:#334f73}
+    .client.prosangue .weekly{background:#fee2e2;color:#a93434}
+    .client.transit .weekly{background:#dcfce7;color:#27713b}
+
+    .thermo-client{
+      border-color:#e6a0a0 !important;
+      background:#fff3f3 !important;
+    }
+    .thermo-client .client-name{color:#a92323}
+    .thermo-client .weekly{background:#ffe1e1;color:#a92323}
 
     .client.exit{
       border-color:#efb5b5;
@@ -418,66 +547,69 @@
             <div>
               <div class="panel-title">Equipe Thermo Fisher</div>
               <div class="panel-sub">Equipe dedicada</div>
+              <div class="thermo-weekly">85,7 jobs/semana</div>
             </div>
             <div class="chev">⌄</div>
           </header>
 
           <div class="panel-body">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Pessoa</th>
-                  <th>Função / Especialidade</th>
-                  <th>Observação</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="person">Tiago Genari</td>
-                  <td>Gerente de Conta<br>Revisão visual, KV e PPT</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td class="person">Gabriel</td>
-                  <td>Motion</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td class="person">Marco</td>
-                  <td>Motion e Captação</td>
-                  <td>
-                    Entra como substituto do Bryan
-                    <div class="tag blue">Transição de função</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="person">Natan</td>
-                  <td>Estático e Web</td>
-                  <td>
-                    Entra para ocupar o lugar do Vitor
-                    <div class="tag green">Reposição</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="person">Jonathan</td>
-                  <td>Estático e RD</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td class="person">Thiago Silva</td>
-                  <td>Motion Jr. e Estático</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td class="person">Vitor Nishikiori</td>
-                  <td>Estático</td>
-                  <td>
-                    <div class="tag red">Afastado por saúde</div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <div class="thermo-leader">
+              <div class="person">Tiago Genari <span class="leader-badge">Líder</span></div>
+              <div class="note" style="font-size:14px;color:var(--ink);margin-top:6px;">
+                Gerente de Conta · Revisão visual, KV e PPT
+              </div>
+            </div>
+
+            <div class="subordinates">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Pessoa</th>
+                    <th>Função / Especialidade</th>
+                    <th>Observação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="person">Gabriel</td>
+                    <td>Motion</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td class="person">Marco</td>
+                    <td>Motion e Captação</td>
+                    <td>
+                      Entra como substituto do Bryan
+                      <div class="tag blue">Transição de função</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="person">Natan</td>
+                    <td>Estático e Web</td>
+                    <td>
+                      Entra para ocupar o lugar do Vitor
+                      <div class="tag green">Reposição</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="person">Jonathan</td>
+                    <td>Estático e RD</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td class="person">Thiago Silva</td>
+                    <td>Motion Jr. e Estático</td>
+                    <td>—</td>
+                  </tr>
+                  <tr class="off-row">
+                    <td class="person">Vitor Nishikiori</td>
+                    <td>Estático</td>
+                    <td><div class="tag red">Afastado por saúde</div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div></div>
         </article>
       </div>
 
@@ -522,49 +654,64 @@
         </article>
 
         <section class="portfolio">
-          <h3>Carteira de clientes</h3>
+          <h3>Demandas recorrentes</h3>
           <div class="clients">
             <div class="client exit">
               <div class="client-name">CNEX</div>
-              <div class="client-note">Está de saída.</div>
+              <div class="client-note">Está de saída.
+              <div class="weekly">4,1 jobs/semana</div></div>
             </div>
-            <div class="client">
+            <div class="client norio">
               <div class="client-name">Escola Norio</div>
+              <div class="weekly">2,7 jobs/semana</div>
             </div>
-            <div class="client">
+            <div class="client fini">
               <div class="client-name">FINI</div>
+              <div class="weekly">2,9 jobs/semana</div>
             </div>
             <div class="client light">
               <div class="client-name">Gente Seguradora</div>
-              <div class="client-note">Apenas uma newsletter semanal.</div>
+              <div class="client-note">Contrato reduzido para apenas uma newsletter semanal.
+              <div class="weekly">1 job/semana</div></div>
             </div>
-            <div class="client">
+            <div class="client havan">
               <div class="client-name">Havan</div>
+              <div class="weekly">1,1 jobs/semana</div>
             </div>
-            <div class="client">
+            <div class="client mds">
               <div class="client-name">MDS</div>
+              <div class="weekly">1,0 job/semana</div>
             </div>
-            <div class="client">
+            <div class="client nutriport">
               <div class="client-name">Nutriport</div>
+              <div class="weekly">4,9 jobs/semana</div>
             </div>
-            <div class="client">
+            <div class="client prosangue">
               <div class="client-name">Pró-Sangue</div>
+              <div class="weekly">2,6 jobs/semana</div>
             </div>
-            <div class="client">
+            <div class="client transit">
               <div class="client-name">TRANSIT BR</div>
+              <div class="weekly">4,8 jobs/semana</div>
+            </div>
+            
+            <div class="client thermo-client">
+              <div class="client-name">Thermo Fisher</div>
+              <div class="weekly">85,7 jobs/semana</div>
+            </div>
+<div class="client" style="border-color:#efc562;background:#fff8e7;">
+              <div class="client-name">Concorrências</div>
+              <div class="client-note">Demanda esporádica.</div>
+            </div>
+            <div class="client gmpromo" style="border-color:#efc562;background:#fff8e7;">
+              <div class="client-name">GM Promo</div>
+              <div class="client-note">Demanda esporádica.</div>
             </div>
           </div>
         </section>
       </div>
     </section>
 
-    <section class="sporadic">
-      <div class="sporadic-title">Demandas esporádicas</div>
-      <div class="sporadic-items">
-        <div class="sporadic-item">Concorrências</div>
-        <div class="sporadic-item">GM Promo</div>
-      </div>
-    </section>
 
     <div class="footnote">
       Clique nos cabeçalhos dos núcleos para expandir ou recolher.
