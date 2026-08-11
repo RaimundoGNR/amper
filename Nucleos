@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Organograma — Criação</title>
+  <style>
+    :root{
+      --bg:#f5f7fa;
+      --card:#ffffff;
+      --ink:#152033;
+      --muted:#6f7a8a;
+      --line:#dbe2ea;
+      --navy:#0c2d59;
+      --blue:#1559b7;
+      --blue-soft:#eef5ff;
+      --green:#2f7d3f;
+      --green-soft:#eef8f0;
+      --amber:#f3a400;
+      --amber-soft:#fff8e7;
+      --red:#c83d3d;
+      --red-soft:#fff0f0;
+      --shadow:0 12px 32px rgba(24, 39, 75, .08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:linear-gradient(180deg,#fafbfd 0%, var(--bg) 100%);
+      color:var(--ink);
+    }
+
+    .page{
+      max-width:1440px;
+      margin:0 auto;
+      padding:34px 24px 56px;
+    }
+
+    .toolbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-bottom:24px;
+    }
+
+    .toolbar h1{
+      margin:0;
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .toolbar p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    button{
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--ink);
+      border-radius:10px;
+      padding:9px 12px;
+      font:inherit;
+      font-size:13px;
+      cursor:pointer;
+    }
+
+    .director-wrap{
+      display:flex;
+      justify-content:center;
+      position:relative;
+      margin:16px 0 52px;
+    }
+
+    .director-wrap::after{
+      content:"";
+      position:absolute;
+      width:2px;
+      height:30px;
+      background:var(--navy);
+      left:50%;
+      bottom:-30px;
+    }
+
+    .director{
+      background:linear-gradient(135deg,#0b274b,#103766);
+      color:#fff;
+      border-radius:18px;
+      padding:20px 34px;
+      min-width:420px;
+      display:flex;
+      align-items:center;
+      gap:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .avatar{
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.12);
+      border:2px solid rgba(255,255,255,.7);
+      font-size:27px;
+    }
+
+    .director .name{
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:.01em;
+    }
+
+    .director .role{
+      font-size:17px;
+      margin-top:2px;
+      opacity:.95;
+    }
+
+    .branches{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+      position:relative;
+    }
+
+    .branches::before{
+      content:"";
+      position:absolute;
+      top:-22px;
+      left:25%;
+      right:25%;
+      height:2px;
+      background:var(--navy);
+    }
+
+    .branch{
+      position:relative;
+    }
+
+    .branch::before{
+      content:"";
+      position:absolute;
+      top:-22px;
+      left:50%;
+      height:22px;
+      width:2px;
+      background:var(--navy);
+    }
+
+    .panel{
+      background:var(--card);
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .panel-head{
+      padding:18px 22px;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      cursor:pointer;
+    }
+
+    .blue .panel-head{background:linear-gradient(135deg,#103b78,#1656aa)}
+    .green .panel-head{background:linear-gradient(135deg,#2a6b37,#3d8e4b)}
+
+    .panel-title{
+      font-size:19px;
+      font-weight:900;
+      margin:0;
+    }
+
+    .panel-sub{
+      font-size:13px;
+      opacity:.9;
+      margin-top:3px;
+    }
+
+    .panel-body{
+      padding:0;
+    }
+
+    .collapsed .panel-body{display:none}
+    .chev{font-size:18px;transition:.2s}
+    .collapsed .chev{transform:rotate(-90deg)}
+
+    .table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    .table th{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      color:#536072;
+      background:#f8fafc;
+      padding:11px 14px;
+      text-align:left;
+      border-bottom:1px solid var(--line);
+    }
+
+    .table td{
+      padding:15px 14px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+      font-size:14px;
+    }
+
+    .table tr:last-child td{border-bottom:none}
+    .person{
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .note{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:4px;
+      line-height:1.35;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:5px 8px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      margin-top:5px;
+    }
+
+    .tag.red{
+      background:var(--red-soft);
+      color:var(--red);
+    }
+
+    .tag.blue{
+      background:var(--blue-soft);
+      color:var(--blue);
+    }
+
+    .tag.green{
+      background:var(--green-soft);
+      color:var(--green);
+    }
+
+    .portfolio{
+      margin-top:20px;
+      padding:20px 22px 22px;
+      background:#fff;
+      border:1px solid #b9d3bf;
+      border-radius:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .portfolio h3{
+      margin:0 0 14px;
+      color:var(--green);
+      font-size:16px;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+    }
+
+    .clients{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+    }
+
+    .client{
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:11px 12px;
+      background:#fbfcfd;
+    }
+
+    .client-name{
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .client-note{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
+    }
+
+    .client.exit{
+      border-color:#efb5b5;
+      background:#fff7f7;
+    }
+
+    .client.light{
+      border-color:#b9d3f5;
+      background:#f2f7ff;
+    }
+
+    .sporadic{
+      margin-top:28px;
+      background:var(--amber-soft);
+      border:1px solid #efc562;
+      border-radius:18px;
+      padding:18px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .sporadic-title{
+      font-weight:900;
+      color:#c88900;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+    }
+
+    .sporadic-items{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .sporadic-item{
+      background:#fff;
+      border:1px solid #efcc77;
+      border-radius:999px;
+      padding:9px 13px;
+      font-weight:700;
+      font-size:13px;
+    }
+
+    .footnote{
+      margin-top:18px;
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    @media(max-width:1000px){
+      .branches{
+        grid-template-columns:1fr;
+      }
+      .branches::before,
+      .branch::before,
+      .director-wrap::after{
+        display:none;
+      }
+      .director-wrap{margin-bottom:24px}
+    }
+
+    @media(max-width:700px){
+      .page{padding:20px 14px 36px}
+      .director{
+        min-width:0;
+        width:100%;
+        padding:18px 20px;
+      }
+      .director .name{font-size:24px}
+      .clients{grid-template-columns:1fr}
+      .table{
+        display:block;
+        overflow-x:auto;
+      }
+      .toolbar{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+      .sporadic{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
+    @media print{
+      body{background:#fff}
+      .toolbar button{display:none}
+      .page{max-width:none;padding:0}
+      .panel,.portfolio,.sporadic,.director{box-shadow:none}
+      .collapsed .panel-body{display:block}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="toolbar">
+      <div>
+        <h1>Organograma — Criação</h1>
+        <p>Estrutura por núcleo, carteira e responsabilidades.</p>
+      </div>
+      <button onclick="window.print()">Imprimir / salvar PDF</button>
+    </div>
+
+    <section class="director-wrap">
+      <div class="director">
+        <div class="avatar">👤</div>
+        <div>
+          <div class="name">DINHO</div>
+          <div class="role">Diretor de Criação</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="branches">
+      <div class="branch">
+        <article class="panel blue" id="thermo">
+          <header class="panel-head" onclick="togglePanel('thermo')">
+            <div>
+              <div class="panel-title">Equipe Thermo Fisher</div>
+              <div class="panel-sub">Equipe dedicada</div>
+            </div>
+            <div class="chev">⌄</div>
+          </header>
+
+          <div class="panel-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Pessoa</th>
+                  <th>Função / Especialidade</th>
+                  <th>Observação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="person">Tiago Genari</td>
+                  <td>Gerente de Conta<br>Revisão visual, KV e PPT</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td class="person">Gabriel</td>
+                  <td>Motion</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td class="person">Marco</td>
+                  <td>Motion e Captação</td>
+                  <td>
+                    Entra como substituto do Bryan
+                    <div class="tag blue">Transição de função</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="person">Natan</td>
+                  <td>Estático e Web</td>
+                  <td>
+                    Entra para ocupar o lugar do Vitor
+                    <div class="tag green">Reposição</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="person">Jonathan</td>
+                  <td>Estático e RD</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td class="person">Thiago Silva</td>
+                  <td>Motion Jr. e Estático</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td class="person">Vitor Nishikiori</td>
+                  <td>Estático</td>
+                  <td>
+                    <div class="tag red">Afastado por saúde</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+
+      <div class="branch">
+        <article class="panel green" id="resto">
+          <header class="panel-head" onclick="togglePanel('resto')">
+            <div>
+              <div class="panel-title">O resto dos clientes</div>
+              <div class="panel-sub">Equipe multi clientes</div>
+            </div>
+            <div class="chev">⌄</div>
+          </header>
+
+          <div class="panel-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Pessoa</th>
+                  <th>Função / Especialidade</th>
+                  <th>Observação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="person">Dimi</td>
+                  <td>Motion Jr. e Estático</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td class="person">Henrique</td>
+                  <td>Motion e Estático</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td class="person">Dinho</td>
+                  <td>Estático e Tráfego</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <section class="portfolio">
+          <h3>Carteira de clientes</h3>
+          <div class="clients">
+            <div class="client exit">
+              <div class="client-name">CNEX</div>
+              <div class="client-note">Está de saída.</div>
+            </div>
+            <div class="client">
+              <div class="client-name">Escola Norio</div>
+            </div>
+            <div class="client">
+              <div class="client-name">FINI</div>
+            </div>
+            <div class="client light">
+              <div class="client-name">Gente Seguradora</div>
+              <div class="client-note">Apenas uma newsletter semanal.</div>
+            </div>
+            <div class="client">
+              <div class="client-name">Havan</div>
+            </div>
+            <div class="client">
+              <div class="client-name">MDS</div>
+            </div>
+            <div class="client">
+              <div class="client-name">Nutriport</div>
+            </div>
+            <div class="client">
+              <div class="client-name">Pró-Sangue</div>
+            </div>
+            <div class="client">
+              <div class="client-name">TRANSIT BR</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="sporadic">
+      <div class="sporadic-title">Demandas esporádicas</div>
+      <div class="sporadic-items">
+        <div class="sporadic-item">Concorrências</div>
+        <div class="sporadic-item">GM Promo</div>
+      </div>
+    </section>
+
+    <div class="footnote">
+      Clique nos cabeçalhos dos núcleos para expandir ou recolher.
+    </div>
+  </main>
+
+  <script>
+    function togglePanel(id){
+      document.getElementById(id).classList.toggle('collapsed');
+    }
+  </script>
+</body>
+</html>
